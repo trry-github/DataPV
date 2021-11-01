@@ -135,7 +135,7 @@ function hasChildren(item) {
     return flag
 }
 function getSourceList(arr) {
-    arr.map(item => {
+    arr.forEach(item => {
         if (item.meta.sidebar !== false) {
             if (hasChildren(item)) {
                 let baseBreadcrumb = item.meta.baseBreadcrumb ? deepClone(item.meta.baseBreadcrumb) : []

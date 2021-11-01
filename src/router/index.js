@@ -58,7 +58,7 @@ const constantRoutes = [
     }
 ]
 
-import MultilevelMenuExample from './modules/multilevel.menu.example'
+import DataExample from './modules/data.example'
 import BreadcrumbExample from './modules/breadcrumb.example'
 
 // 动态路由（异步路由、导航栏路由）
@@ -69,7 +69,7 @@ const asyncRoutes = [
             icon: 'sidebar-default'
         },
         children: [
-            MultilevelMenuExample,
+            DataExample,
             BreadcrumbExample
         ]
     }

@@ -32,8 +32,8 @@ let globalSettings = {
     showCopyright: true,
     // 版权信息配置，格式为：Copyright © [dates] <company>, All Rights Reserved
     copyrightDates: '2020-2021',
-    copyrightCompany: 'Fantastic-admin',
-    copyrightWebsite: 'https://hooray.github.io/fantastic-admin',
+    copyrightCompany: 'Bliangjs',
+    copyrightWebsite: 'https://hooray.github.io/Bliangjs',
     // 是否开启导航搜索
     enableNavSearch: true,
     // 是否开启移动端适配，开启后当页面宽度小于 992px 时自动切换为移动端展示
@@ -47,7 +47,7 @@ let globalSettings = {
     // 是否开启动态标题
     enableDynamicTitle: false,
     // 是否开启控制台
-    enableDashboard: true,
+    enableDashboard: false,
     // 控制台名称
     dashboardTitle: '控制台',
     // 是否开启后端返回路由数据

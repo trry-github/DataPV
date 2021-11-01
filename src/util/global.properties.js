@@ -5,6 +5,9 @@ import 'dayjs/locale/zh-cn'
 import Cookies from 'js-cookie'
 import hotkeys from 'hotkeys-js'
 import mitt from 'mitt'
+import * as echarts from 'echarts'
+
+const eventBus = mitt()
 
 export default function globalProperties(app) {
     // 请求
@@ -17,4 +20,14 @@ export default function globalProperties(app) {
     app.config.globalProperties.$cookies = Cookies
     app.config.globalProperties.$hotkeys = hotkeys
     app.config.globalProperties.$eventBus = mitt()
+}
+export const globalVariable = {
+    $api: api,
+    $auth: auth,
+    $authAll: authAll,
+    $dayjs: dayjs,
+    $cookies: Cookies,
+    $hotkeys: hotkeys,
+    $eventBus: eventBus,
+    $echarts: echarts
 }

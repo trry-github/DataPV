@@ -1,10 +1,6 @@
 <template>
     <div class="user">
         <div class="tools">
-            <span v-if="$store.state.settings.mode == 'pc'" class="item item-pro" @click="pro">
-                <svg-icon name="pro" />
-                <span class="title">查看专业版</span>
-            </span>
             <span v-if="$store.state.settings.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
                 <svg-icon name="search" />
             </span>
@@ -85,9 +81,6 @@ function userCommand(command) {
             break
     }
 }
-function pro() {
-    window.open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro`, 'top')
-}
 </script>
 
 <style lang="scss" scoped>
@@ -107,33 +100,6 @@ function pro() {
         cursor: pointer;
         vertical-align: middle;
         transition: all 0.3s;
-    }
-    .item-pro {
-        display: inline-block;
-        transform-origin: right center;
-        animation: pro-text 3s ease-out infinite;
-        @keyframes pro-text {
-            0%,
-            20% {
-                transform: scale(1);
-            }
-            50%,
-            70% {
-                transform: scale(1.2);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        .title {
-            padding-left: 5px;
-            font-weight: bold;
-            font-size: 14px;
-            background-image: linear-gradient(to right, #ffa237, #fc455d);
-            /* stylelint-disable-next-line property-no-vendor-prefix */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
     }
 }
 :deep(.user-container) {

@@ -19,7 +19,6 @@
                             </transition>
                         </router-view>
                     </div>
-                    <Copyright v-if="showCopyright" />
                 </div>
             </div>
             <el-backtop :right="20" :bottom="20" title="回到顶部" />
@@ -39,11 +38,7 @@ import ThemeSetting from './components/ThemeSetting/index.vue'
 
 const { proxy } = getCurrentInstance()
 const store = useStore()
-const routeInfo = useRoute(), router = useRouter()
-
-const showCopyright = computed(() => {
-    return typeof routeInfo.meta.copyright !== 'undefined' ? routeInfo.meta.copyright : store.state.settings.showCopyright
-})
+const router = useRouter()
 
 watch(() => store.state.settings.sidebarCollapse, val => {
     if (store.state.settings.mode === 'mobile') {
