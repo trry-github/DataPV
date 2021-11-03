@@ -1,38 +1,39 @@
 <template>
     <page-main>
-        <el-form ref="form" :model="options" label-suffix=":" inline label-width="120px">
-            <el-form-item label="页面height">
-                <el-input v-model="options.height" />
-            </el-form-item>
-            <el-form-item label="页面width">
-                <el-input v-model="options.width" />
-            </el-form-item>
-            <el-form-item label="组件height">
-                <el-input v-model="options.children[0].style.height" />
-            </el-form-item>
-            <el-form-item label="组件width">
-                <el-input v-model="options.children[0].style.width" />
-            </el-form-item>
-            <el-form-item label="修改height">
-                <el-input v-model="options.height" />
-            </el-form-item>
-            <el-form-item label="修改width">
-                <el-input v-model="options.width" />
-            </el-form-item>
-            <el-form-item label="修改height">
-                <el-input v-model="options.height" />
-            </el-form-item>
-            <el-form-item label="修改width">
-                <el-input v-model="options.width" />
-            </el-form-item>
-        </el-form>
+        <search-bar>
+            <el-form ref="form" :model="options" label-suffix=":" inline label-width="120">
+                <el-form-item label="页面height">
+                    <el-input v-model="options.height" />
+                </el-form-item>
+                <el-form-item label="页面width">
+                    <el-input v-model="options.width" />
+                </el-form-item>
+                <el-form-item label="组件height">
+                    <el-input v-model="options.children[0].style.height" />
+                </el-form-item>
+                <el-form-item label="组件width">
+                    <el-input v-model="options.children[0].style.width" />
+                </el-form-item>
+                <el-form-item label="修改height">
+                    <el-input v-model="options.height" />
+                </el-form-item>
+                <el-form-item label="修改width">
+                    <el-input v-model="options.width" />
+                </el-form-item>
+                <el-form-item label="修改height">
+                    <el-input v-model="options.height" />
+                </el-form-item>
+                <el-form-item label="修改width">
+                    <el-input v-model="options.width" />
+                </el-form-item>
+            </el-form>
+        </search-bar>
         <DrowPage v-model="options" />
     </page-main>
 </template>
 
 <script setup>
 import { reactive } from 'vue'
-
 const options = reactive({
     id: '123123',
     name: '页面名称',
@@ -45,8 +46,8 @@ const options = reactive({
             id: '123321',
             name: 'LineCharts',
             style: {
-                top: '200px',
-                left: '300px',
+                top: 200,
+                left: 300,
                 width: '800px', // 页面宽度
                 height: '400px' // 页面高度
             },

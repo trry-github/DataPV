@@ -3,7 +3,7 @@
 </template>
 
 <script setup name="LineCharts">
-import { onMounted, defineProps, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { globalVariable } from '@/util/global.properties'
 const props = defineProps({
     options: {
@@ -19,9 +19,10 @@ onMounted(() => {
  * 初始化折线图
  * 调用时机：DOM加载完成
  */
+// 'light'
 const initLineCharts = () => {
     myCharts.value = globalVariable.$echarts.init(
-        document.getElementById('line-charts'), 'light'
+        document.getElementById('line-charts')
     )
     if (props.options && JSON.stringify(props.options) !== '{}') {
         onReload()

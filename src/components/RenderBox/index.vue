@@ -1,12 +1,17 @@
 <template>
-    <div class="component-wrap">
-        <component :is="components" :key="options.id" :options="options" @click="drawer = true" />
-    </div>
+    <darg-box :style-options="options.style" :is-active="options.id === $store.state.activeComponent.activeEle.id">
+        <transition name="el-fade-in-linear">
+            <component :is="components" :key="options.id" :options="options" @click.stop="onSelectEle" />
+        </transition>
+    </darg-box>
 </template>
 
 <script setup name="RenderBox">
-import {  defineProps } from 'vue'
+import { useStore } from 'vuex'
 
+import DargBox from './DargBox/index.vue'
+
+const store = useStore()
 const props = defineProps({
     options: {
         type: Object,
@@ -14,25 +19,9 @@ const props = defineProps({
     }
 })
 
-console.log(props.options)
-
 const components = defineAsyncComponent(() => import(`../${props.options.name}/index.vue`))
 
-</script>
-
-<style lang="scss" scoped>
-.component-wrap {
-    position: absolute;
-    border: 1px solid transparent;
-    padding: 1px;
-    width: v-bind("props.options.style.width");
-    height: v-bind("props.options.style.height");
-    top: v-bind("props.options.style.top");
-    left: v-bind("props.options.style.left");
-    right: v-bind("props.options.style.right");
-    bottom: v-bind("props.options.style.bottom");
-    &:hover {
-        border: 1px solid #41b883;
-    }
+const onSelectEle = () => {
+    store.commit('activeComponent/setActiveEle', props.options)
 }
-</style>
+</script>

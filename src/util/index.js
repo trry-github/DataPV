@@ -1,4 +1,5 @@
 import store from '@/store'
+// import { isString, isNumber } from '@vue/shared'
 
 export function deepClone(target) {
     // 定义一个变量
@@ -61,3 +62,17 @@ export function authAll(value) {
     })
     return auth
 }
+
+/**
+ * 补充单位
+ * @param {String|Number} value
+ * @returns string
+ */
+// export function addUnit(value) {
+//     if (isString(value)) {
+//         return value
+//     } else if (isNumber(value)) {
+//         return `${value}px`
+//     }
+//     return ''
+// }

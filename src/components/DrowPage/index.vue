@@ -1,11 +1,13 @@
 <template>
-    <div class="drow-page">
+    <div class="drow-page" @click="onClick">
         <RenderBox v-for="item in options.children" :key="item.id" :options="item" />
     </div>
 </template>
 
 <script setup name="DrowPage">
-import { computed, defineEmits } from 'vue'
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+const store = useStore()
 const props = defineProps({
     modelValue: {
         type: Object,
@@ -22,12 +24,18 @@ const options = computed({
         emit('update:modelValue', val)
     }
 })
+
+const onClick = () => {
+    store.commit('activeComponent/setActiveEle', {})
+}
 </script>
 
 <style lang="scss" scoped>
 .drow-page {
     width: v-bind("props.modelValue.width");
     height: v-bind("props.modelValue.height");
+    position: relative;
+    border: 1px dashed red;
     // background-color: var(--el-color-primary);
 }
 </style>
