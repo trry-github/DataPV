@@ -105,10 +105,6 @@
                 </el-select>
             </div>
             <div class="setting-item">
-                <div class="label">底部版权</div>
-                <el-switch v-model="showCopyright" />
-            </div>
-            <div class="setting-item">
                 <div class="label">
                     加载进度条
                     <el-tooltip content="该功能开启时，跳转路由会看到页面顶部有条蓝色的进度条" placement="top" :append-to-body="false">
@@ -229,16 +225,6 @@ const enableBreadcrumb = computed({
     set: function(newValue) {
         store.commit('settings/updateThemeSetting', {
             'enableBreadcrumb': newValue
-        })
-    }
-})
-const showCopyright = computed({
-    get: function() {
-        return store.state.settings.showCopyright
-    },
-    set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
-            'showCopyright': newValue
         })
     }
 })

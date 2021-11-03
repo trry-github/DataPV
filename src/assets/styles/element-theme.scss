@@ -24,6 +24,6 @@
 // );
 
 // 全局引入
-@forward "element-plus/theme-chalk/src/common/var.scss"with ($colors: ("primary": ("base": #f2711c,
+@forward "element-plus/theme-chalk/src/common/var.scss"with ($colors: ("primary": ("base": #0b173f,
 )), $font-path:("element-plus/theme-chalk/fonts"));
 @use "element-plus/theme-chalk/src/index.scss"

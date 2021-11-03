@@ -80,7 +80,6 @@
                 </el-row>
             </el-form>
         </div>
-        <Copyright v-if="$store.state.settings.showCopyright" />
     </div>
 </template>
 

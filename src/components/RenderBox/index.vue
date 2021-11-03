@@ -1,30 +1,38 @@
 <template>
-    <component :is="getComponent(item.name)" v-for="item in options.children" :key="item.id" :options="item" />
+    <div class="component-wrap">
+        <component :is="components" :key="options.id" :options="options" @click="drawer = true" />
+    </div>
 </template>
 
 <script setup name="RenderBox">
-import { computed } from 'vue'
+import {  defineProps } from 'vue'
 
 const props = defineProps({
-    value: {
+    options: {
         type: Object,
         required: true
     }
 })
-const emit = defineEmits(['value:update'])
-const options = computed({
-    get() {
-        return props.value
-    },
-    set(val) {
-        emit('value:update', val)
-    }
-})
 
-const getComponent = name => {
-    return defineAsyncComponent(() => import(`../${name}/index.vue`))
-}
+console.log(props.options)
 
-console.log(props.value)
+const components = defineAsyncComponent(() => import(`../${props.options.name}/index.vue`))
 
 </script>
+
+<style lang="scss" scoped>
+.component-wrap {
+    position: absolute;
+    border: 1px solid transparent;
+    padding: 1px;
+    width: v-bind("props.options.style.width");
+    height: v-bind("props.options.style.height");
+    top: v-bind("props.options.style.top");
+    left: v-bind("props.options.style.left");
+    right: v-bind("props.options.style.right");
+    bottom: v-bind("props.options.style.bottom");
+    &:hover {
+        border: 1px solid #41b883;
+    }
+}
+</style>

@@ -1,9 +1,9 @@
 <template>
-    <div id="line-charts" v-observe-element-height="onResize" />
+    <div id="line-charts" v-observe-element-height="onReload" />
 </template>
 
 <script setup name="LineCharts">
-import { onMounted, defineProps } from 'vue'
+import { onMounted, defineProps, ref } from 'vue'
 import { globalVariable } from '@/util/global.properties'
 const props = defineProps({
     options: {
@@ -11,6 +11,7 @@ const props = defineProps({
         default: Object
     }
 })
+const myCharts = ref({})
 onMounted(() => {
     initLineCharts()
 })
@@ -19,32 +20,32 @@ onMounted(() => {
  * 调用时机：DOM加载完成
  */
 const initLineCharts = () => {
-    const myCharts = globalVariable.$echarts.init(
-        document.getElementById('line-charts')
+    myCharts.value = globalVariable.$echarts.init(
+        document.getElementById('line-charts'), 'light'
     )
-
-    myCharts.setOption(props.options.chartsOptions)
+    if (props.options && JSON.stringify(props.options) !== '{}') {
+        onReload()
+    }
 }
+
+// watchEffect(() => {
+//     onReload()
+// })
 
 /**
  * 重新渲染
  * 调用时机：宽度高度发生变化时调用
  */
-const onResize = () => {
-    console.log(123)
-
+const onReload = options => {
+    console.log(options || props.options.chartsOptions)
+    myCharts.value.setOption(options || props.options.chartsOptions)
 }
 </script>
 
 <style lang="scss" scoped>
 // scss
 #line-charts {
-    width: v-bind("options.style.width");
-    height: v-bind("options.style.height");
-    position: absolute;
-    top: v-bind("options.style.top");
-    left: v-bind("options.style.left");
-    right: v-bind("options.style.right");
-    bottom: v-bind("options.style.bottom");
+    width: 100%;
+    height: 100%;
 }
 </style>

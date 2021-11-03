@@ -1,36 +1,33 @@
 <template>
-    <page-main class="drow-page">
-        <div class="wrapper">
-            <RenderBox v-model:value="options" />
-        </div>
-    </page-main>
+    <div class="drow-page">
+        <RenderBox v-for="item in options.children" :key="item.id" :options="item" />
+    </div>
 </template>
 
 <script setup name="DrowPage">
 import { computed, defineEmits } from 'vue'
-
 const props = defineProps({
-    value: {
+    modelValue: {
         type: Object,
         required: true
     }
 })
 
-const emit = defineEmits(['value:update'])
+const emit = defineEmits(['update:modelValue'])
 const options = computed({
     get() {
-        return props.value
+        return props.modelValue
     },
-    set(val = {}) {
-        emit('value:update', val)
+    set(val) {
+        emit('update:modelValue', val)
     }
 })
-
 </script>
 
 <style lang="scss" scoped>
 .drow-page {
-    width: v-bind("props.value.width");
-    height: v-bind("props.value.height");
+    width: v-bind("props.modelValue.width");
+    height: v-bind("props.modelValue.height");
+    // background-color: var(--el-color-primary);
 }
 </style>

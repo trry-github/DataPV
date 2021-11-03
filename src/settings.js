@@ -28,12 +28,6 @@ let globalSettings = {
     topbarFixed: true,
     // 是否开启面包屑导航
     enableBreadcrumb: true,
-    // 是否显示底部版权信息，同时在路由 meta 对象里可以单独设置某个路由是否显示底部版权信息
-    showCopyright: true,
-    // 版权信息配置，格式为：Copyright © [dates] <company>, All Rights Reserved
-    copyrightDates: '2020-2021',
-    copyrightCompany: 'Bliangjs',
-    copyrightWebsite: 'https://hooray.github.io/Bliangjs',
     // 是否开启导航搜索
     enableNavSearch: true,
     // 是否开启移动端适配，开启后当页面宽度小于 992px 时自动切换为移动端展示

@@ -1,6 +1,24 @@
 <template>
-    <div>
+    <page-main>
         <el-form ref="form" :model="options" label-suffix=":" inline label-width="120px">
+            <el-form-item label="页面height">
+                <el-input v-model="options.height" />
+            </el-form-item>
+            <el-form-item label="页面width">
+                <el-input v-model="options.width" />
+            </el-form-item>
+            <el-form-item label="组件height">
+                <el-input v-model="options.children[0].style.height" />
+            </el-form-item>
+            <el-form-item label="组件width">
+                <el-input v-model="options.children[0].style.width" />
+            </el-form-item>
+            <el-form-item label="修改height">
+                <el-input v-model="options.height" />
+            </el-form-item>
+            <el-form-item label="修改width">
+                <el-input v-model="options.width" />
+            </el-form-item>
             <el-form-item label="修改height">
                 <el-input v-model="options.height" />
             </el-form-item>
@@ -8,8 +26,8 @@
                 <el-input v-model="options.width" />
             </el-form-item>
         </el-form>
-        <DrowPage v-model:value="options" />
-    </div>
+        <DrowPage v-model="options" />
+    </page-main>
 </template>
 
 <script setup>

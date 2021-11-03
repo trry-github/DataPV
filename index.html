@@ -12,6 +12,7 @@
         #app {
             height: 100%;
         }
+
         .loader {
             position: absolute;
             top: 50%;
@@ -121,11 +122,11 @@
     <% if (debugTool=='eruda' ) { %>
         <script src="//cdn.jsdelivr.net/npm/eruda/eruda.min.js"></script>
         <script>eruda.init();</script>
-        <% } %>
-            <% if (debugTool=='vconsole' ) { %>
-                <script src="//cdn.jsdelivr.net/npm/vconsole/dist/vconsole.min.js"></script>
-                <script>new VConsole();</script>
-                <% } %>
+    <% } %>
+    <% if (debugTool=='vconsole' ) { %>
+        <script src="//cdn.jsdelivr.net/npm/vconsole/dist/vconsole.min.js"></script>
+        <script>new VConsole();</script>
+    <% } %>
 </body>
 
 </html>

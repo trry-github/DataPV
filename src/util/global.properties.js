@@ -6,6 +6,7 @@ import Cookies from 'js-cookie'
 import hotkeys from 'hotkeys-js'
 import mitt from 'mitt'
 import * as echarts from 'echarts'
+import  'echarts/theme/shine.js'
 
 const eventBus = mitt()
 
