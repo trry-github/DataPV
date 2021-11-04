@@ -1,6 +1,6 @@
 <template>
     <div class="drow-page" @click="onClick">
-        <RenderBox v-for="item in options.children" :key="item.id" :options="item" />
+        <RenderBox v-for="item in options.children" :key="item.id" :options="item" @change="updateModelValue" />
     </div>
 </template>
 
@@ -28,6 +28,11 @@ const options = computed({
 const onClick = () => {
     store.commit('activeComponent/setActiveEle', {})
 }
+
+const updateModelValue = () => {
+    console.log('更新了')
+
+}
 </script>
 
 <style lang="scss" scoped>
@@ -35,7 +40,7 @@ const onClick = () => {
     width: v-bind("props.modelValue.width");
     height: v-bind("props.modelValue.height");
     position: relative;
-    border: 1px dashed red;
+    border: 1px dashed #ddd;
     // background-color: var(--el-color-primary);
 }
 </style>

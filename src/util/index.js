@@ -1,5 +1,6 @@
 import store from '@/store'
-// import { isString, isNumber } from '@vue/shared'
+export const isNumber = val => typeof val === 'number'
+export const isString = val => typeof val === 'string'
 
 export function deepClone(target) {
     // 定义一个变量
@@ -68,11 +69,11 @@ export function authAll(value) {
  * @param {String|Number} value
  * @returns string
  */
-// export function addUnit(value) {
-//     if (isString(value)) {
-//         return value
-//     } else if (isNumber(value)) {
-//         return `${value}px`
-//     }
-//     return ''
-// }
+export function addUnit(value) {
+    if (isString(value)) {
+        return value
+    } else if (isNumber(value)) {
+        return `${value}px`
+    }
+    return ''
+}

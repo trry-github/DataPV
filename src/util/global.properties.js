@@ -5,6 +5,8 @@ import 'dayjs/locale/zh-cn'
 import Cookies from 'js-cookie'
 import hotkeys from 'hotkeys-js'
 import mitt from 'mitt'
+import { nanoid } from 'nanoid'
+import _ from 'lodash'
 import * as echarts from 'echarts'
 import 'echarts/theme/shine.js'
 
@@ -21,6 +23,7 @@ export default function globalProperties(app) {
     app.config.globalProperties.$cookies = Cookies
     app.config.globalProperties.$hotkeys = hotkeys
     app.config.globalProperties.$eventBus = mitt()
+    app.config.globalProperties.$lodash = _
 }
 export const globalVariable = {
     $api: api,
@@ -30,5 +33,7 @@ export const globalVariable = {
     $cookies: Cookies,
     $hotkeys: hotkeys,
     $eventBus: eventBus,
-    $echarts: echarts
+    $echarts: echarts,
+    $lodash: _,
+    $nanoid: nanoid
 }

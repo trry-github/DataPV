@@ -1,24 +1,24 @@
-Arguments: 
+Arguments:
   C:\Program Files\nodejs\node.exe C:\Users\wubaoliang\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add vuedraggable
 
-PATH: 
+PATH:
   C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Git\cmd;%NVM_HOME%;%NVM_SYMLINK%;C:\Users\wubaoliang\AppData\Local\Microsoft\WindowsApps;C:\Users\wubaoliang\AppData\Roaming\npm;D:\Microsoft VS Code\bin;C:\Users\wubaoliang\AppData\Roaming\nvm;C:\Program Files\nodejs
 
-Yarn version: 
+Yarn version:
   1.22.17
 
-Node version: 
+Node version:
   14.18.1
 
-Platform: 
+Platform:
   win32 x64
 
-Trace: 
+Trace:
   Error: ENOENT: no such file or directory, copyfile 'C:\Users\wubaoliang\AppData\Local\Yarn\Cache\v6\npm-ignore-4.0.6-750e3db5862087b4737ebac8207ffd1ef27b25fc-integrity\node_modules\ignore\index.d.ts' -> 'E:\DataPV\node_modules\@eslint\eslintrc\node_modules\ignore\index.d.ts'
 
-npm manifest: 
+npm manifest:
   {
-      "name": "Bliangjs",
+      "name": "trry",
       "version": "0.1.0",
       "scripts": {
           "dev": "vite",
@@ -87,8 +87,8 @@ npm manifest:
       }
   }
 
-yarn manifest: 
+yarn manifest:
   No manifest
 
-Lockfile: 
+Lockfile:
   No lockfile

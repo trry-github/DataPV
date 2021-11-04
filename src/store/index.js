@@ -1,4 +1,4 @@
-import { createStore, createLogger } from 'vuex'
+import { createStore } from 'vuex'
 
 const modules = {}
 const modulesContext = import.meta.globEager('./modules/*.js')
@@ -9,5 +9,6 @@ for (const path in modulesContext) {
 export default createStore({
     modules: modules,
     strict: !import.meta.env.PROD,
-    plugins: !import.meta.env.PROD ? [createLogger()] : []
+    plugins: !import.meta.env.PROD ? [] : []
+    // plugins: !import.meta.env.PROD ? [createLogger()] : []
 })
