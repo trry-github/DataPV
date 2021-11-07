@@ -17,7 +17,7 @@ const props = defineProps({
     }
 })
 const emit = defineEmits(['change'])
-const isActive = computed(() => props.options.id === store.state.activeComponent.activeEle.id)
+const isActive = computed(() => props.options.id === store.state.screenData.activeEle.id)
 const components = defineAsyncComponent(() => import(`../${props.options.name}/index.vue`))
 
 /**
