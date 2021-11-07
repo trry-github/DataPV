@@ -2,7 +2,8 @@
  * 存放全局公用状态
  */
 const state = () => ({
-    activeEle: {}
+    activeEle: {},
+    mode: ''
 })
 
 const getters = {}

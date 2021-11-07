@@ -1,43 +1,47 @@
 <template>
-    <div ref="dargBoxDom" class="component-wrap" :class="{ 'act-status': isActive }" @tap="onTap" @swipe="onSwipe" @press="onPress" @panmove="onPanmove" @pinch="onPinch" @rotate="onRotate">
-        <p v-show="isActive" class="zoom-point" />
-        <p v-show="isActive" class="zoom-point" />
-        <p v-show="isActive" class="zoom-point" />
-        <p v-show="isActive" class="zoom-point" />
-        <p v-show="isActive" class="zoom-point" />
-        <p v-show="isActive" class="zoom-point" />
-        <p v-show="isActive" class="zoom-point" />
-        <p v-show="isActive" class="zoom-point" />
+    <div ref="dargBoxDom" class="component-wrap" :class="{ 'act-status': isActive }" @click.right="rightClick" @click.left="leftClick" @panstart="onPanstart" @panend="emit('change', { id: id, style: styleOptions })" @panmove="onPanmove">
+        <p v-for="item in 8" v-show="isActive" :key="item" class="zoom-point" />
         <slot />
     </div>
+    <RightMenu v-if="$store.state" v-model="showMenu" />
 </template>
 
 <script setup name="DargBox">
-import { computed, onMounted, ref } from 'vue'
-import { addUnit } from '@/util'
+import { onMounted, ref, watchEffect } from 'vue'
+import { isUnit, unUnit } from '@/util'
 
 import AnyTouch from 'any-touch'
+
+import RightMenu from '../RightMenu/index.vue'
 
 const props = defineProps({
     isActive: {
         type: Boolean,
         default: false
     },
-    modelValue: {
+    id: {
+        type: String,
+        required: true
+    },
+    options: {
         type: Object,
         default: Object
     }
 })
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['change'])
 const dargBoxDom = ref(null)
-const dargBoxStyle = computed({
-    get() {
-        return props.modelValue
-    },
-    set(val) {
-        emit('update:modelValue', val)
+const styleOptions = ref({})
+const showMenu = ref(false)
+watchEffect(() => {
+    // 初始化样式
+    for (let key in props.options) {
+        styleOptions.value[key] = unUnit(props.options[key])
     }
 })
+watchEffect(() => {
+    if (!props.isActive)showMenu.value = props.isActive
+})
+
 onMounted(() => {
     initAnyTouch()
 })
@@ -49,28 +53,39 @@ const initAnyTouch = () => {
         at.destroy()
     })
 }
+
+const rightClick = () => {
+    if (!props.isActive) return
+    showMenu.value = true
+}
+const leftClick = () => {
+    console.log('leftClick')
+
+    showMenu.value = false
+}
 /**
  * 拖动事件
  * 调用时机：鼠标拖动图表时
  * @param {event} e
  */
 const onPanmove = e => {
-    dargBoxStyle.value.top = parseInt(dargBoxStyle.value.top + e.deltaY)
-    dargBoxStyle.value.left = parseInt(dargBoxStyle.value.left + e.deltaX)
+    styleOptions.value.top = parseInt((styleOptions.value.top || 0) + e.deltaY)
+    styleOptions.value.left = parseInt((styleOptions.value.left || 0) + e.deltaX)
 }
 </script>
 
 <style lang="scss" scoped>
 .component-wrap {
     position: absolute;
+    transform-origin: center center;
     border: 1px solid transparent;
     padding: 1px;
-    width: v-bind("addUnit(dargBoxStyle.width)");
-    height: v-bind("addUnit(dargBoxStyle.height)");
-    top: v-bind("addUnit(dargBoxStyle.top)");
-    left: v-bind("addUnit(dargBoxStyle.left)");
-    right: v-bind("addUnit(dargBoxStyle.right)");
-    bottom: v-bind("addUnit(dargBoxStyle.bottom)");
+    width: v-bind("isUnit(styleOptions.width)");
+    height: v-bind("isUnit(styleOptions.height)");
+    top: v-bind("isUnit(styleOptions.top)");
+    left: v-bind("isUnit(styleOptions.left)");
+    right: v-bind("isUnit(styleOptions.right)");
+    bottom: v-bind("isUnit(styleOptions.bottom)");
     &:hover {
         @extend.act-status;
     }

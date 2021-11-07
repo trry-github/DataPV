@@ -32,7 +32,7 @@
         "path-to-regexp": "^6.2.0",
         "screenfull": "^5.1.0",
         "tinymce": "^5.10.0",
-        "vue": "^3.2.20",
+        "vue": "^3.2.21",
         "vue-router": "^4.0.12",
         "vuex": "^4.0.2"
     },

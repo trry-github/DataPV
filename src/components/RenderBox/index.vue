@@ -1,13 +1,10 @@
 <template>
-    <darg-box :key="configItem.id" v-model="configItemStyle" :is-active="configItem.id === $store.state.activeComponent.activeEle.id">
-        <transition name="el-fade-in-linear">
-            <component :is="components" :key="configItem.id" v-model="configItem" @click.stop="onSelectEle" />
-        </transition>
+    <darg-box :id="options.id" :options="options.style" :is-active="isActive" @change="(val) =>emit('change', val)">
+        <component :is="components" :key="options.id" :options="options" @click.stop="onSelectEle" />
     </darg-box>
 </template>
 
 <script setup name="RenderBox">
-import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { deepClone } from '@/util'
 import DargBox from './DargBox/index.vue'
@@ -20,23 +17,14 @@ const props = defineProps({
     }
 })
 const emit = defineEmits(['change'])
+const isActive = computed(() => props.options.id === store.state.activeComponent.activeEle.id)
+const components = defineAsyncComponent(() => import(`../${props.options.name}/index.vue`))
 
-const configItem = computed(() => props.options)
-const configItemStyle = computed({
-    get() {
-        return props.options.style
-    },
-    set(val) {
-        console.log('change', val)
-
-        emit('change', val)
-    }
-})
-
-const components = defineAsyncComponent(() => import(`../${configItem.value.name}/index.vue`))
-
+/**
+ * 选择组件，存在store中
+ * 调用时机：单机组件
+ */
 const onSelectEle = () => {
-    store.commit('activeComponent/setActiveEle', deepClone(configItem.value))
+    store.commit('screenData/setActiveEle', deepClone(props.options))
 }
-
 </script>

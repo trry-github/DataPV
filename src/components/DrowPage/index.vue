@@ -1,11 +1,10 @@
 <template>
     <div class="drow-page" @click="onClick">
-        <RenderBox v-for="item in options.children" :key="item.id" :options="item" @change="updateModelValue" />
+        <RenderBox v-for="(item) in modelValue.children" :key="item.id" :options="item" @change="updateModelValue" />
     </div>
 </template>
 
 <script setup name="DrowPage">
-import { computed } from 'vue'
 import { useStore } from 'vuex'
 const store = useStore()
 const props = defineProps({
@@ -16,31 +15,31 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-const options = computed({
-    get() {
-        return props.modelValue
-    },
-    set(val) {
-        emit('update:modelValue', val)
-    }
-})
 
 const onClick = () => {
-    store.commit('activeComponent/setActiveEle', {})
+    store.commit('screenData/setActiveEle', {})
 }
 
-const updateModelValue = () => {
-    console.log('更新了')
-
+const updateModelValue = ({ id, style }) => {
+    const componentList = props.modelValue.children.map(item => {
+        if (item.id === id) {
+            item.style = {
+                ...item.style,
+                ...style
+            }
+        }
+        return item
+    })
+    emit('update:modelValue', { ...props.modelValue, ...{ children: componentList } })
 }
 </script>
 
 <style lang="scss" scoped>
 .drow-page {
-    width: v-bind("props.modelValue.width");
-    height: v-bind("props.modelValue.height");
+    width: v-bind("modelValue.width");
+    height: v-bind("modelValue.height");
     position: relative;
     border: 1px dashed #ddd;
-    // background-color: var(--el-color-primary);
+    transition: all 0.3s;
 }
 </style>

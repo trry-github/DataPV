@@ -1,26 +1,17 @@
 <template>
-    <div :id="'line-charts'+modelValue.id" v-observe-element-height="onReload" style="width: 100%;height: 100%;" />
+    <div :id="options.id" v-observe-element-height="onReload" style="width: 100%;height: 100%;" />
 </template>
 
 <script setup name="LineCharts">
-import { computed, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { globalVariable } from '@/util/global.properties'
 const props = defineProps({
-    modelValue: {
+    options: {
         type: Object,
         default: Object
     }
 })
-const emit = defineEmits(['update:modelValue'])
-const myCharts = {}
-const options = computed({
-    get() {
-        return props.modelValue
-    },
-    set(val) {
-        emit('update:modelValue', val)
-    }
-})
+let myCharts = null
 onMounted(() => {
     initLineCharts()
 })
@@ -29,10 +20,10 @@ onMounted(() => {
  * 调用时机：DOM加载完成
  */
 const initLineCharts = () => {
-    myCharts.value = globalVariable.$echarts.init(
-        document.getElementById('line-charts' + props.modelValue.id), 'light'
+    myCharts = globalVariable.$echarts.init(
+        document.getElementById(props.options.id), 'light'
     )
-    if (options.value && JSON.stringify(options.value) !== '{}') {
+    if (props.options && JSON.stringify(props.options) !== '{}') {
         onReload()
     }
 }
@@ -42,6 +33,6 @@ const initLineCharts = () => {
  * 调用时机：宽度高度发生变化时调用
  */
 const onReload = config => {
-    myCharts.value.setOption(config || options.value.chartsOptions)
+    myCharts.setOption(config || props.options.chartsOptions)
 }
 </script>

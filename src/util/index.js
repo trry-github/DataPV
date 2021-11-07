@@ -77,3 +77,44 @@ export function addUnit(value) {
     }
     return ''
 }
+
+/**
+ * 判断字符串有没有单位
+ * 调用时机：渲染页面
+ * @params {String|Number} val
+ * @returns string
+ */
+export function isUnit(val) {
+    if (isNumber(val)) {
+        return val + 'px'
+    } else if (isString(val)) {
+        if (
+            val.indexOf('px') ||
+            val.indexOf('vh') ||
+            val.indexOf('vw') ||
+            val.indexOf('%')
+        ) {
+            return val
+        } else {
+            return isUnit(Number(val))
+        }
+    }
+}
+
+/**
+ * 事件作用
+ * 调用时机：收/发消息事件触发时 回顶
+ * @param {string|number} val
+ * @returns number
+ */
+export function unUnit(val) {
+    if (isNumber(val)) {
+        return val
+    } else if (isString(val)) {
+        if (val.search('px') !== -1)  return Number(val.replace('px', ''))
+        if (val.search('vh') !== -1)  return Number(val.replace('vh', ''))
+        if (val.search('vh') !== -1)  return Number(val.replace('vh', ''))
+        if (val.search('%') !== -1)  return Number(val.replace('%', ''))
+        unUnit(Number(val))
+    }
+}
