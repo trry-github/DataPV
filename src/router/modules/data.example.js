@@ -6,18 +6,10 @@ export default {
     redirect: '/multilevel_menu_example/page',
     name: 'multilevelMenuExample',
     meta: {
-        title: '配置大屏',
+        title: '多级页面',
         icon: 'sidebar-menu'
     },
     children: [
-        {
-            path: 'page',
-            name: 'multilevelMenuExample1',
-            component: () => import('@/views/DataExample/page.vue'),
-            meta: {
-                title: '测试json->视图'
-            }
-        },
         {
             path: 'level2',
             name: 'multilevelMenuExample2',

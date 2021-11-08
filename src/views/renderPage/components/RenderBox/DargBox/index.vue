@@ -1,9 +1,9 @@
 <template>
-    <div ref="dargBoxDom" class="component-wrap" :class="{ 'act-status': isActive }" @click.right="rightClick" @click.left="leftClick" @panstart="onPanstart" @panend="emit('change', { id: id, style: styleOptions })" @panmove="onPanmove">
+    <div ref="dargBoxDom" class="component-wrap" :class="{ 'act-status': isActive }" @click.right="rightClick" @click.left="leftClick" @panstart="onPanstart" @panend="onPanend" @panmove="onPanmove">
         <p v-for="item in 8" v-show="isActive" :key="item" class="zoom-point" />
         <slot />
+        <RightMenu v-model="showMenu" :position-style="positionStyle" @on-deal="onDeal" />
     </div>
-    <RightMenu v-if="$store.state" v-model="showMenu" />
 </template>
 
 <script setup name="DargBox">
@@ -28,10 +28,11 @@ const props = defineProps({
         default: Object
     }
 })
-const emit = defineEmits(['change'])
+const emit = defineEmits(['change', 'dealRightClick'])
 const dargBoxDom = ref(null)
 const styleOptions = ref({})
 const showMenu = ref(false)
+const positionStyle = ref({})
 watchEffect(() => {
     // 初始化样式
     for (let key in props.options) {
@@ -54,14 +55,26 @@ const initAnyTouch = () => {
     })
 }
 
-const rightClick = () => {
+const rightClick = e => {
+    positionStyle.value.left = e.offsetX
+    positionStyle.value.top = e.offsetY
+
     if (!props.isActive) return
     showMenu.value = true
 }
 const leftClick = () => {
-    console.log('leftClick')
-
     showMenu.value = false
+}
+/**
+ * 处理有击事件
+ * 调用时机：右击后选择某项处理数据
+ * @param {type} DELETE 删除
+ */
+const onDeal = ({ type }) => {
+    emit('dealRightClick', { type, id: props.id })
+}
+const onPanend = () => {
+    emit('change', { id: props.id, style: styleOptions.value })
 }
 /**
  * 拖动事件
@@ -69,6 +82,7 @@ const leftClick = () => {
  * @param {event} e
  */
 const onPanmove = e => {
+    if (!props.isActive) return
     styleOptions.value.top = parseInt((styleOptions.value.top || 0) + e.deltaY)
     styleOptions.value.left = parseInt((styleOptions.value.left || 0) + e.deltaX)
 }

@@ -60,6 +60,7 @@ const constantRoutes = [
 
 import DataExample from './modules/data.example'
 import BreadcrumbExample from './modules/breadcrumb.example'
+import RenderPage from './modules/render.page'
 
 // 动态路由（异步路由、导航栏路由）
 const asyncRoutes = [
@@ -70,7 +71,8 @@ const asyncRoutes = [
         },
         children: [
             DataExample,
-            BreadcrumbExample
+            BreadcrumbExample,
+            RenderPage
         ]
     }
 ]
