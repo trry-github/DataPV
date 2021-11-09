@@ -1,20 +1,6 @@
-<template>
-    <page-main>
-        <div class="wrap">
-            <RenderBox v-loading="false" :options="options" />
-        </div>
-    </page-main>
-</template>
-
-<script setup>
-import RenderBox from './components/RenderBox.vue'
-import { globalVariable } from '@/util/global.properties'
-const { $nanoid } = globalVariable
-const options = reactive({
-    id: $nanoid(),
-    defaultType: 'Line',
-    title: '折线图堆叠',
-    chartsOptions: { // echarts 配置信息
+function useLineCharts() {
+    return {
+        // echarts 配置信息
         title: {
             // text: '折线图堆叠'
         },
@@ -82,13 +68,5 @@ const options = reactive({
             }
         ]
     }
-})
-
-</script>
-
-<style lang="scss" scoped>
-.wrap {
-    height: 500px;
-    box-sizing: border-box;
 }
-</style>
+export default useLineCharts

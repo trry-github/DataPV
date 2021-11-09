@@ -11,6 +11,14 @@ export default {
     },
     children: [
         {
+            path: 'page',
+            name: 'DataExample',
+            component: () => import('@/views/DataExample/page.vue'),
+            meta: {
+                title: '动态展示图表组件'
+            }
+        },
+        {
             path: 'level2',
             name: 'multilevelMenuExample2',
             redirect: '/DataExample/level2/page',
