@@ -53,5 +53,5 @@ const onReload = (...config) => {
 const onResize = config => {
     myCharts.resize(config)
 }
-onResize()
+onResize
 </script>
