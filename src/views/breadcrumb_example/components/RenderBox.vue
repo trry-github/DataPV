@@ -14,7 +14,7 @@
 
 <script setup name="RenderBox">
 import { onMounted, reactive, ref } from 'vue'
-import { useChartResize } from '@/globalHooks/chartResize'
+// import { useChartResize } from '@/globalHooks/chartResize'
 
 const props = defineProps({
     options: {
@@ -54,7 +54,7 @@ const dataMap = reactive({
 })
 
 onMounted(() => {
-    useChartResize(chartEle.value.$el, chartEle.value.onResize)
+    // useChartResize(chartEle.value.$el, chartEle.value.onResize)
 })
 // 组件
 const onSelectChart = ({ type }) => {

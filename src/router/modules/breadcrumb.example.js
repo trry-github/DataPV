@@ -6,7 +6,7 @@ export default {
     redirect: '/breadcrumb_example/list1',
     name: 'breadcrumbExample',
     meta: {
-        title: '面包屑导航',
+        title: '数据报表',
         icon: 'sidebar-breadcrumb'
     },
     children: [
@@ -15,7 +15,7 @@ export default {
             name: 'breadcrumbExampleList1',
             component: () => import('@/views/breadcrumb_example/list1.vue'),
             meta: {
-                title: '列表1（平级模式）'
+                title: '添加报表'
             }
         },
         {
@@ -33,7 +33,7 @@ export default {
             name: 'breadcrumbExampleList2',
             redirect: '/breadcrumb_example/list2',
             meta: {
-                title: '列表2（层级模式）'
+                title: '报表集合'
             },
             children: [
                 {

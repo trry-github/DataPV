@@ -1,32 +1,221 @@
 <mxfile host="65bd71144e">
     <diagram id="tBCEV7SiKIYrZlFKY9jT" name="第 1 页">
-        <mxGraphModel dx="1106" dy="1109" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+        <mxGraphModel dx="1106" dy="811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="1" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
-                <mxCell id="4" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="2" target="3" edge="1">
+                <mxCell id="47" value="" style="group" connectable="0" vertex="1" parent="1">
+                    <mxGeometry x="100" y="40" width="330" height="490" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="&lt;font style=&quot;font-size: 18px&quot;&gt;&lt;b&gt;单个报表数据&lt;/b&gt;&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="47">
+                    <mxGeometry x="105" width="120" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="" style="swimlane;startSize=0;shadow=1;" vertex="1" parent="47">
+                    <mxGeometry y="30" width="330" height="460" as="geometry">
+                        <mxRectangle x="90" y="70" width="50" height="40" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="3" value="选择数据源，请求接口，查对应的数据（约定数据结构）" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="39" vertex="1">
+                    <mxGeometry x="5" y="140" width="320" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.488;entryY=-0.05;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="39" source="41" target="3">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="2" value="选择数据源" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="200" y="30" width="120" height="60" as="geometry"/>
+                <mxCell id="41" value="&lt;span&gt;数据源&lt;/span&gt;" style="shape=datastore;whiteSpace=wrap;html=1;shadow=1;" vertex="1" parent="39">
+                    <mxGeometry x="131" y="30" width="60" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="3" target="5" edge="1">
+                <mxCell id="48" value="&lt;span&gt;对外暴露组件&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;" vertex="1" parent="39">
+                    <mxGeometry x="110" y="320" width="110" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="126" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="98" target="125">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="3" value="请求接口，查对应的数据（约定数据结构）" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="140" y="120" width="240" height="20" as="geometry"/>
+                <mxCell id="98" value="选择可用图表" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="270" y="680" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="5" target="10" edge="1">
+                <mxCell id="128" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="125" target="127">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="5" value="对外暴露组件" style="whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="200" y="170" width="120" height="60" as="geometry"/>
+                <mxCell id="125" value="选需要展示的字段" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="430" y="680" width="120" height="30" as="geometry"/>
                 </mxCell>
-                <mxCell id="10" value="折线图、饼状图、柱状图..." style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" parent="1" vertex="1">
-                    <mxGeometry x="200" y="300" width="120" height="60" as="geometry"/>
+                <mxCell id="132" value="" style="edgeStyle=none;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="127" target="131">
+                    <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="12" value="单个报表数据" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="40" y="30" width="90" height="20" as="geometry"/>
+                <mxCell id="127" value="收集当前表需要的数据（标题、表描述、是否公开）" style="rounded=1;whiteSpace=wrap;html=1;shadow=1;" vertex="1" parent="1">
+                    <mxGeometry x="570" y="670" width="130" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="143" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="131" target="141">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="145" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="131" target="142">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="131" value="保存当前表" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="595" y="760" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="147" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="141" target="146">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="510" y="880"/>
+                            <mxPoint x="635" y="880"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="149" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="141" target="142">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="141" value="&lt;span&gt;私库&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="465" y="810" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="148" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="142">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="635" y="920" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="760" y="880"/>
+                            <mxPoint x="635" y="880"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="142" value="&lt;span&gt;公库&lt;/span&gt;&lt;br&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="715" y="810" width="90" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="146" value="聚合报表（需要使用json描述整个页面）" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="575" y="920" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="150" value="发布到公库" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="595" y="800" width="80" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="152" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="151" target="98">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="151" value="当前用户可查看的所有报表" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;" vertex="1" parent="1">
+                    <mxGeometry x="170" y="655" width="60" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="187" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="183" target="186">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="183" value="前端可提前在项目中放容器" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1090" y="380" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="185" value="针对业务中部分区域可视化报表" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="1040" y="330" width="180" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="186" value="每个容器对应一个坑" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+                    <mxGeometry x="1290" y="370" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="213" value="" style="group" connectable="0" vertex="1" parent="1">
+                    <mxGeometry x="1000" y="510" width="730" height="600" as="geometry"/>
+                </mxCell>
+                <mxCell id="154" value="当前用户下能看的报表的所有接口" style="shape=cylinder;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;" vertex="1" parent="213">
+                    <mxGeometry x="190" width="60" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="155" value="拿到对应接口的所有的参数" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="213">
+                    <mxGeometry x="310" y="10" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="156" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="154" target="155">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="157" value="用户选择需要的参数" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="213">
+                    <mxGeometry x="310" y="110" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="158" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="155" target="157">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="224" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="166" target="192">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="231" y="440"/>
+                            <mxPoint x="370" y="440"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="166" value="个人使用" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="213">
+                    <mxGeometry x="186" y="360" width="90" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="167" value="公开使用" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="213">
+                    <mxGeometry x="470" y="360" width="90" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="175" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="166" target="167">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="178" value="组合生成页面看板（可以修改图表位置）可对单个图表进行拖拽布局，" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="213">
+                    <mxGeometry x="310" y="540" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="194" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="213" source="181" target="157">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="730" y="570"/>
+                            <mxPoint x="730" y="140"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="181" value="可编辑单个图表展示信息" style="ellipse;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="213">
+                    <mxGeometry x="510" y="540" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="182" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="178" target="181">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="184" value="针对可视化整张报表页面" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="213">
+                    <mxGeometry y="40" width="150" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="193" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="213" source="192" target="178">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="192" value="&lt;span&gt;可放入提前准备好的坑中&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="213">
+                    <mxGeometry x="295" y="490" width="150" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="206" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="167" target="192">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="515" y="440"/>
+                            <mxPoint x="370" y="440"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="215" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="199" target="212">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="218" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="199" target="211">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="199" value="保存用户所选操作，形成固定报表" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="213">
+                    <mxGeometry x="330" y="185" width="80" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="200" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="213" source="157" target="199">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="201" value="发布" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="213">
+                    <mxGeometry x="354" y="350" width="40" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="210" value="是否已有当前报表" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="213">
+                    <mxGeometry x="410" y="215" width="110" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="211" value="是" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="213">
+                    <mxGeometry x="230" y="215" width="30" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="217" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="213" source="212" target="167">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="212" value="否" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" vertex="1" parent="213">
+                    <mxGeometry x="355" y="290" width="30" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="220" value="&lt;span&gt;公开表包含信息，&lt;/span&gt;&lt;br&gt;&lt;span&gt;发布人、发布时间等&lt;/span&gt;" style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;" vertex="1" parent="213">
+                    <mxGeometry x="530" y="280" width="120" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="223" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="212">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1230" y="870" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="225" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="211">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1310" y="1080" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1140" y="735"/>
+                            <mxPoint x="1140" y="1080"/>
+                        </Array>
+                    </mxGeometry>
                 </mxCell>
             </root>
         </mxGraphModel>
