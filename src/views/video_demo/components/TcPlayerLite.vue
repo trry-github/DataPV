@@ -1,5 +1,5 @@
 <template>
-    <div id="id_test_video" style="width: 100%; height: 400px;" />
+    <div id="id_test_video" style="width: 100%; height: 200px;" />
 </template>
 
 <script setup>

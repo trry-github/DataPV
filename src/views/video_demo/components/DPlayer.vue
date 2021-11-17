@@ -1,15 +1,15 @@
 <template>
-    <div id="dplayer" style="width: 100%; height: 400px;" />
+    <div id="dplayer" style="width: 100%;height: 200px;" />
 </template>
 
 <script setup>
 import { onMounted, onUnmounted } from 'vue'
 import DPlayer from 'dplayer'
 import Hls from 'hls.js'
-window.Hls = Hls
 
 let dp = null
 let timer = null
+const hls = new Hls()
 onMounted(() => {
     initDplayer()
 
@@ -97,30 +97,34 @@ function onMedia(Media) {
 function initDplayer() {
     const options = {
         container: document.getElementById('dplayer'),
-        live: true,
+        // live: true,
         autoplay: true,
         lang: 'zh-cn',
         video: {
+            type: 'customHls',
+            url: 'https://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540.m3u8', // 示例地址
+            customType: {
+                customHls: function(video) {
+                    hls.loadSource(video.src)
+                    hls.attachMedia(video)
+                }
+            }
             // url: 'http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8'
             // url: 'rtmp://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540'
             // url: 'webrtc://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540'
             // url: 'https://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540.flv'
-            url: 'https://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540.m3u8' // 示例地址
         }
     }
     dp = new DPlayer(options)
-    console.log(dp)
 
-    dp.plugins.hls.on(Hls.Events.ERROR, function(E, data) {
-        // dp.plugins.hls.destroy()
+    // 监听拉流状态
+    hls.on(Hls.Events.ERROR, function(E, data) {
         console.log('错误信息', E, data)
 
+        clearInterval(timer)
         timer = setTimeout(() => {
-            console.log(dp)
-            // dp.switchVideo({ url: options.video.url })
-            dp.plugins.hls.attachMedia(dp.video)
-            dp.plugins.hls.loadSource(options.video.url)
-
+            hls.attachMedia(dp.video)
+            hls.loadSource(options.video.url)
         }, 3000)
 
     })
@@ -207,7 +211,7 @@ function registerEvent(dp) {
 
     })
     dp.on('timeupdate', () => {
-        console.log('timeupdate', dp.video.currentTime, dp.video.duration)
+        console.log('timeupdate', { currentTime: dp.video.currentTime, duration: dp.video.duration })
 
     })
     dp.on('volumechange', e => {
@@ -221,7 +225,7 @@ function registerEvent(dp) {
 }
 
 onUnmounted(() => {
-    dp.plugins.hls.destroy()
+    hls.destroy()
     dp.destroy()
 })
 </script>

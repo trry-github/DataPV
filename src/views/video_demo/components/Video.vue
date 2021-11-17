@@ -8,12 +8,12 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import videojs from 'video.js'
+// import videojs from 'video.js'
 onMounted(() => {
-    let player = videojs('myvideo', {}, function() {
-        console.log('videojs播放器初始化成功')
-    })
-    player.play()
+    // let player = videojs('myvideo', {}, function() {
+    //     console.log('videojs播放器初始化成功')
+    // })
+    // player.play()
 })
 </script>
 
