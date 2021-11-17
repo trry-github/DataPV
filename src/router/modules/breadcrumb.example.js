@@ -29,6 +29,14 @@ export default {
             }
         },
         {
+            path: 'page',
+            name: 'DataExample',
+            component: () => import('@/views/breadcrumb_example/page.vue'),
+            meta: {
+                title: '动态展示图表组件'
+            }
+        },
+        {
             path: 'list2',
             name: 'breadcrumbExampleList2',
             redirect: '/breadcrumb_example/list2',

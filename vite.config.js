@@ -30,14 +30,20 @@ export default ({ mode, command }) => {
         // 开发服务器选项 https://cn.vitejs.dev/config/#server-options
         server: {
             open: true,
-            port: 9000,
+            port: 8080,
             host: '0.0.0.0',
             proxy: {
-                '/proxy': {
+                '/qxs-api': {
                     target: env.VITE_APP_API_BASEURL,
                     changeOrigin:
                         command === 'serve' && env.VITE_OPEN_PROXY == 'true',
-                    rewrite: path => path.replace(/\/proxy/, '')
+                    rewrite: path => path.replace(/\/qxs-api/, '')
+                },
+                '/api': {
+                    target: env.VITE_APP_API_BASEURL,
+                    changeOrigin:
+                        command === 'serve' && env.VITE_OPEN_PROXY == 'true',
+                    rewrite: path => path.replace(/\/api/, '')
                 }
             }
         },

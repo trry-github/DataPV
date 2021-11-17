@@ -58,7 +58,7 @@ const constantRoutes = [
     }
 ]
 
-import DataExample from './modules/data.example'
+import VideoDemo from './modules/video.demo'
 import BreadcrumbExample from './modules/breadcrumb.example'
 import RenderPage from './modules/render.page'
 
@@ -70,7 +70,7 @@ const asyncRoutes = [
             icon: 'sidebar-default'
         },
         children: [
-            DataExample,
+            VideoDemo,
             BreadcrumbExample,
             RenderPage
         ]
