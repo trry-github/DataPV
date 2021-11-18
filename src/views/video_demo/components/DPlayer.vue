@@ -97,7 +97,7 @@ function onMedia(Media) {
 function initDplayer() {
     const options = {
         container: document.getElementById('dplayer'),
-        // live: true,
+        live: true,
         autoplay: true,
         lang: 'zh-cn',
         video: {
@@ -211,6 +211,10 @@ function registerEvent(dp) {
 
     })
     dp.on('timeupdate', () => {
+        if (dp.video.duration  - dp.video.currentTime === 0) {
+            console.log('播放结束了')
+
+        }
         console.log('timeupdate', { currentTime: dp.video.currentTime, duration: dp.video.duration })
 
     })

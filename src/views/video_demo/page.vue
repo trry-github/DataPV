@@ -1,12 +1,12 @@
 <template>
     <page-main class="wrap">
         <DPlayer />
-        <!-- <TcPlayerLite /> -->
+        <TcPlayerLite />
     </page-main>
 </template>
 <script setup>
 import DPlayer from './components/Dplayer.vue'
-// import TcPlayerLite from './components/TcPlayerLite.vue'
+import TcPlayerLite from './components/TcPlayerLite.vue'
 </script>
 
 <style lang="scss" scoped>

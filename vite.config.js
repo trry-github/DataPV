@@ -33,18 +33,18 @@ export default ({ mode, command }) => {
             port: 8080,
             host: '0.0.0.0',
             proxy: {
-                '/qxs-api': {
-                    target: env.VITE_APP_API_BASEURL,
-                    changeOrigin:
-                        command === 'serve' && env.VITE_OPEN_PROXY == 'true',
-                    rewrite: path => path.replace(/\/qxs-api/, '')
-                },
-                '/api': {
-                    target: env.VITE_APP_API_BASEURL,
-                    changeOrigin:
-                        command === 'serve' && env.VITE_OPEN_PROXY == 'true',
-                    rewrite: path => path.replace(/\/api/, '')
-                }
+                // '/qxs-api': {
+                //     target: env.VITE_APP_API_BASEURL,
+                //     changeOrigin:
+                //         command === 'serve' && env.VITE_OPEN_PROXY == 'true',
+                //     rewrite: path => path.replace(/\/qxs-api/, '')
+                // },
+                // '/api': {
+                //     target: env.VITE_APP_API_BASEURL,
+                //     changeOrigin:
+                //         command === 'serve' && env.VITE_OPEN_PROXY == 'true',
+                //     rewrite: path => path.replace(/\/api/, '')
+                // }
             }
         },
         // 构建选项 https://cn.vitejs.dev/config/#server-fsserve-root
