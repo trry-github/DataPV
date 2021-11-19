@@ -37,7 +37,7 @@
                             <div class="breadcrumb">
                                 <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
                                     {{ bc }}
-                                    <i class="el-icon-arrow-right" />
+                                    <svg-icon name="el-icon-arrow-right" />
                                 </span>
                             </div>
                             <div class="path">{{ item.path }}</div>
@@ -135,7 +135,7 @@ function hasChildren(item) {
     return flag
 }
 function getSourceList(arr) {
-    arr.forEach(item => {
+    arr.map(item => {
         if (item.meta.sidebar !== false) {
             if (hasChildren(item)) {
                 let baseBreadcrumb = item.meta.baseBreadcrumb ? deepClone(item.meta.baseBreadcrumb) : []
@@ -221,10 +221,10 @@ function scrollTo(offsetTop) {
     backdrop-filter: blur(10px);
     transition: all 0.2s;
     transform: translateZ(0);
-    opacity: 0%;
+    opacity: 0;
     visibility: hidden;
     &.searching {
-        opacity: 100%;
+        opacity: 1;
         visibility: visible;
         .container {
             transform: initial;
@@ -347,8 +347,11 @@ function scrollTo(offsetTop) {
                         @include text-overflow(1, true);
                     }
                     .breadcrumb {
-                        span:last-child i {
-                            display: none;
+                        span {
+                            margin-right: 5px;
+                            &:last-child i {
+                                display: none;
+                            }
                         }
                     }
                 }

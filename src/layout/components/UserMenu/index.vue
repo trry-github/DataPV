@@ -17,10 +17,10 @@
         <el-dropdown class="user-container" @command="userCommand">
             <div class="user-wrapper">
                 <el-avatar size="medium">
-                    <i class="el-icon-user-solid" />
+                    <el-icon><el-icon-user-filled /></el-icon>
                 </el-avatar>
                 {{ $store.state.user.account }}
-                <i class="el-icon-caret-bottom" />
+                <el-icon><el-icon-caret-bottom /></el-icon>
             </div>
             <template #dropdown>
                 <el-dropdown-menu class="user-dropdown">
@@ -100,6 +100,33 @@ function userCommand(command) {
         cursor: pointer;
         vertical-align: middle;
         transition: all 0.3s;
+    }
+    .item-pro {
+        display: inline-block;
+        transform-origin: right center;
+        animation: pro-text 3s ease-out infinite;
+        @keyframes pro-text {
+            0%,
+            20% {
+                transform: scale(1);
+            }
+            50%,
+            70% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .title {
+            padding-left: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            background-image: linear-gradient(to right, #ffa237, #fc455d);
+            /* stylelint-disable-next-line property-no-vendor-prefix */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 }
 :deep(.user-container) {

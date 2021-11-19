@@ -23,13 +23,13 @@ function hasPermission(permissions, route) {
 function filterAsyncRoutes(routes, permissions) {
     const res = []
     routes.forEach(route => {
-        const tmp = { ...route }
-        if (hasPermission(permissions, tmp)) {
-            if (tmp.children) {
-                tmp.children = filterAsyncRoutes(tmp.children, permissions)
-                tmp.children.length && res.push(tmp)
+        let tmpRoute = deepClone(route)
+        if (hasPermission(permissions, tmpRoute)) {
+            if (tmpRoute.children) {
+                tmpRoute.children = filterAsyncRoutes(tmpRoute.children, permissions)
+                tmpRoute.children.length && res.push(tmpRoute)
             } else {
-                res.push(tmp)
+                res.push(tmpRoute)
             }
         }
     })
@@ -58,13 +58,12 @@ function formatBackRoutes(routes, views = import.meta.glob('../../views/**/*.vue
 function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
     let res = []
     routes.forEach(route => {
-        const tmp = { ...route }
-        if (tmp.children) {
+        if (route.children) {
             let childrenBaseUrl = ''
             if (baseUrl == '') {
-                childrenBaseUrl = tmp.path
-            } else if (tmp.path != '') {
-                childrenBaseUrl = `${baseUrl}/${tmp.path}`
+                childrenBaseUrl = route.path
+            } else if (route.path != '') {
+                childrenBaseUrl = `${baseUrl}/${route.path}`
             }
             let childrenBreadcrumb = deepClone(breadcrumb)
             if (route.meta.breadcrumb !== false) {
@@ -78,7 +77,7 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
             tmpRoute.meta.breadcrumbNeste = childrenBreadcrumb
             delete tmpRoute.children
             res.push(tmpRoute)
-            let childrenRoutes = flatAsyncRoutes(tmp.children, childrenBreadcrumb, childrenBaseUrl)
+            let childrenRoutes = flatAsyncRoutes(route.children, childrenBreadcrumb, childrenBaseUrl)
             childrenRoutes.map(item => {
                 // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
                 if (res.some(v => v.path == item.path)) {
@@ -92,26 +91,50 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
                 }
             })
         } else {
+            let tmpRoute = deepClone(route)
             if (baseUrl != '') {
-                if (tmp.path != '') {
-                    tmp.path = `${baseUrl}/${tmp.path}`
+                if (tmpRoute.path != '') {
+                    tmpRoute.path = `${baseUrl}/${tmpRoute.path}`
                 } else {
-                    tmp.path = baseUrl
+                    tmpRoute.path = baseUrl
                 }
             }
             // 处理面包屑导航
             let tmpBreadcrumb = deepClone(breadcrumb)
-            if (tmp.meta.breadcrumb !== false) {
+            if (tmpRoute.meta.breadcrumb !== false) {
                 tmpBreadcrumb.push({
-                    path: tmp.path,
-                    title: tmp.meta.title
+                    path: tmpRoute.path,
+                    title: tmpRoute.meta.title
                 })
             }
-            tmp.meta.breadcrumbNeste = tmpBreadcrumb
-            res.push(tmp)
+            tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
+            res.push(tmpRoute)
         }
     })
     return res
+}
+
+function getDeepestPath(routes, rootPath = '') {
+    let retnPath
+    if (routes.children) {
+        if (
+            routes.children.some(item => {
+                return item.meta.sidebar != false
+            })
+        ) {
+            for (let i = 0; i < routes.children.length; i++) {
+                if (routes.children[i].meta.sidebar != false) {
+                    retnPath = getDeepestPath(routes.children[i], path.resolve(rootPath, routes.path))
+                    break
+                }
+            }
+        } else {
+            retnPath = getDeepestPath(routes.children[0], path.resolve(rootPath, routes.path))
+        }
+    } else {
+        retnPath = path.resolve(rootPath, routes.path)
+    }
+    return retnPath
 }
 
 const state = () => ({
@@ -138,24 +161,26 @@ const getters = {
     },
     sidebarRoutes: (state, getters) => {
         return getters.routes.length > 0 ? getters.routes[state.headerActived].children : []
+    },
+    sidebarRoutesFirstDeepestPath: (state, getters) => {
+        return getters.routes.length > 0 ? getDeepestPath(getters.sidebarRoutes[0]) : '/'
     }
 }
 
 const actions = {
     // 根据权限动态生成路由（前端生成）
-    generateRoutesAtFront({ rootState, dispatch, commit }, data) {
+    generateRoutesAtFront({ rootState, dispatch, commit }, asyncRoutes) {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async resolve => {
             let accessedRoutes
             // 如果权限功能开启，则需要对路由数据进行筛选过滤
             if (rootState.settings.enablePermission) {
                 const permissions = await dispatch('user/getPermissions', null, { root: true })
-                accessedRoutes = filterAsyncRoutes(data.asyncRoutes, permissions)
+                accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
             } else {
-                accessedRoutes = data.asyncRoutes
+                accessedRoutes = deepClone(asyncRoutes)
             }
             commit('setRoutes', accessedRoutes)
-            commit('setHeaderActived', data.currentPath)
             let routes = []
             accessedRoutes.map(item => {
                 routes.push(...item.children)
@@ -166,7 +191,7 @@ const actions = {
                     item.children = flatAsyncRoutes(item.children, [{
                         path: item.path,
                         title: item.meta.title
-                    }])
+                    }], item.path)
                 }
             })
             commit('setDefaultOpenedPaths', routes)
@@ -174,7 +199,7 @@ const actions = {
         })
     },
     // 生成路由（后端获取）
-    generateRoutesAtBack({ rootState, dispatch, commit }, data) {
+    generateRoutesAtBack({ rootState, dispatch, commit }) {
         return new Promise(resolve => {
             api.get('route/list', {
                 baseURL: '/mock/'
@@ -186,10 +211,9 @@ const actions = {
                     const permissions = await dispatch('user/getPermissions', null, { root: true })
                     accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
                 } else {
-                    accessedRoutes = asyncRoutes
+                    accessedRoutes = deepClone(asyncRoutes)
                 }
                 commit('setRoutes', accessedRoutes)
-                commit('setHeaderActived', data.currentPath)
                 let routes = []
                 accessedRoutes.map(item => {
                     routes.push(...item.children)
@@ -200,7 +224,7 @@ const actions = {
                         item.children = flatAsyncRoutes(item.children, [{
                             path: item.path,
                             title: item.meta.title
-                        }])
+                        }], item.path)
                     }
                 })
                 commit('setDefaultOpenedPaths', routes)
@@ -213,6 +237,8 @@ const actions = {
 const mutations = {
     invalidRoutes(state) {
         state.isGenerate = false
+        state.routes = []
+        state.defaultOpenedPaths = []
         state.headerActived = 0
     },
     setRoutes(state, routes) {
@@ -257,6 +283,7 @@ const mutations = {
         state.currentRemoveRoutes.forEach(removeRoute => {
             removeRoute()
         })
+        state.currentRemoveRoutes = []
     }
 }
 

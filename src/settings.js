@@ -41,7 +41,7 @@ let globalSettings = {
     // 是否开启动态标题
     enableDynamicTitle: false,
     // 是否开启控制台
-    enableDashboard: false,
+    enableDashboard: true,
     // 控制台名称
     dashboardTitle: '控制台',
     // 是否开启后端返回路由数据

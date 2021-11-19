@@ -11,40 +11,28 @@ export default ({ mode, command }) => {
     const scssResources = []
     fs.readdirSync('src/assets/styles/resources').map(dirname => {
         if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile()) {
-            scssResources.push(
-                `@use "src/assets/styles/resources/${dirname}" as *;`
-            )
+            scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`)
         }
     })
     // css 精灵图相关
     fs.readdirSync('src/assets/sprites').map(dirname => {
         if (fs.statSync(`src/assets/sprites/${dirname}`).isDirectory()) {
             // css 精灵图生成的 scss 文件也需要放入全局 scss 资源
-            scssResources.push(
-                `@use "src/assets/sprites/_${dirname}.scss" as *;`
-            )
+            scssResources.push(`@use "src/assets/sprites/_${dirname}.scss" as *;`)
         }
     })
     return defineConfig({
         base: './',
         // 开发服务器选项 https://cn.vitejs.dev/config/#server-options
         server: {
-            open: true,
-            port: 8080,
-            host: '0.0.0.0',
+            open: false,
+            port: 9000,
             proxy: {
-                // '/qxs-api': {
-                //     target: env.VITE_APP_API_BASEURL,
-                //     changeOrigin:
-                //         command === 'serve' && env.VITE_OPEN_PROXY == 'true',
-                //     rewrite: path => path.replace(/\/qxs-api/, '')
-                // },
-                // '/api': {
-                //     target: env.VITE_APP_API_BASEURL,
-                //     changeOrigin:
-                //         command === 'serve' && env.VITE_OPEN_PROXY == 'true',
-                //     rewrite: path => path.replace(/\/api/, '')
-                // }
+                '/proxy': {
+                    target: env.VITE_APP_API_BASEURL,
+                    changeOrigin: command === 'serve' && env.VITE_OPEN_PROXY == 'true',
+                    rewrite: path => path.replace(/\/proxy/, '')
+                }
             }
         },
         // 构建选项 https://cn.vitejs.dev/config/#server-fsserve-root

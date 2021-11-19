@@ -86,7 +86,8 @@ const onSelectChart = ({ type }) => {
             height: 30px;
             padding: 5px;
             &:hover {
-                @extend.active; }
+                @extend.active;
+            }
         }
     }
     .component {

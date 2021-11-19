@@ -5,16 +5,16 @@
             <div class="mask">
                 <div class="actions">
                     <span title="预览" @click="preview(index)">
-                        <i class="el-icon-zoom-in" />
+                        <el-icon><el-icon-zoom-in /></el-icon>
                     </span>
                     <span title="移除" @click="remove(index)">
-                        <i class="el-icon-delete" />
+                        <el-icon><el-icon-delete /></el-icon>
                     </span>
                     <span v-show="url.length > 1" title="左移" :class="{'disabled': index == 0}" @click="move(index, 'left')">
-                        <i class="el-icon-back" />
+                        <el-icon><el-icon-back /></el-icon>
                     </span>
                     <span v-show="url.length > 1" title="右移" :class="{'disabled': index == url.length - 1}" @click="move(index, 'right')">
-                        <i class="el-icon-right" />
+                        <el-icon><el-icon-right /></el-icon>
                     </span>
                 </div>
             </div>
@@ -33,11 +33,11 @@
             class="images-upload"
         >
             <div class="image-slot" :style="`width:${width}px;height:${height}px;`">
-                <i class="el-icon-plus" />
+                <svg-icon name="el-icon-plus" />
             </div>
-            <div v-show="data.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
-                <el-image :src="data.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
-                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="data.progress.percent" />
+            <div v-show="uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
+                <el-image :src="uploadData.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
+                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="uploadData.progress.percent" />
             </div>
         </el-upload>
         <div v-if="!notip" class="el-upload__tip">
@@ -45,7 +45,7 @@
                 <el-alert :title="`上传图片支持 ${ ext.join(' / ') } 格式，单张图片大小不超过 ${ size }MB，建议图片尺寸为 ${width}*${height}，且图片数量不超过 ${ max } 张`" type="info" show-icon :closable="false" />
             </div>
         </div>
-        <el-image-viewer v-if="data.imageViewerVisible" :url-list="url" :initial-index="data.dialogImageIndex" @close="previewClose" />
+        <el-image-viewer v-if="uploadData.imageViewerVisible" :url-list="url" :initial-index="uploadData.dialogImageIndex" @close="previewClose" />
     </div>
 </template>
 
@@ -105,7 +105,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:url', 'on-success'])
 
-const data = ref({
+const uploadData = ref({
     dialogImageIndex: 0,
     imageViewerVisible: false,
     progress: {
@@ -116,12 +116,12 @@ const data = ref({
 
 // 预览
 function preview(index) {
-    data.value.dialogImageIndex = index
-    data.value.imageViewerVisible = true
+    uploadData.value.dialogImageIndex = index
+    uploadData.value.imageViewerVisible = true
 }
 // 关闭预览
 function previewClose() {
-    data.value.imageViewerVisible = false
+    uploadData.value.imageViewerVisible = false
 }
 // 移除
 function remove(index) {
@@ -152,18 +152,16 @@ function beforeUpload(file) {
         proxy.$message.error(`上传图片大小不能超过 ${props.size}MB！`)
     }
     if (isTypeOk && isSizeOk) {
-        data.value.progress.preview = URL.createObjectURL(file)
+        uploadData.value.progress.preview = URL.createObjectURL(file)
     }
     return isTypeOk && isSizeOk
 }
 function onProgress(file) {
-    data.value.progress.percent = ~~file.percent
-    if (data.value.progress.percent == 100) {
-        data.value.progress.preview = ''
-        data.value.progress.percent = 0
-    }
+    uploadData.value.progress.percent = ~~file.percent
 }
 function onSuccess(res) {
+    uploadData.value.progress.preview = ''
+    uploadData.value.progress.percent = 0
     emit('on-success', res)
 }
 </script>
@@ -183,12 +181,11 @@ function onSuccess(res) {
         display: block;
     }
     .mask {
-        opacity: 0%;
+        opacity: 0;
         position: absolute;
         top: 0;
         width: 100%;
         height: 100%;
-        font-size: 24px;
         background-color: rgb(0 0 0 / 50%);
         transition: all 0.3s;
         .actions {
@@ -212,11 +209,14 @@ function onSuccess(res) {
                 &:hover:not(.disabled) {
                     transform: scale(1.5);
                 }
+                .el-icon {
+                    font-size: 24px;
+                }
             }
         }
     }
     &:hover .mask {
-        opacity: 100%;
+        opacity: 1;
     }
 }
 .images-upload {
@@ -236,8 +236,10 @@ function onSuccess(res) {
             width: 100%;
             height: 100%;
             color: #909399;
-            font-size: 30px;
             background-color: transparent;
+            i {
+                font-size: 30px;
+            }
         }
         .progress {
             position: absolute;

@@ -14,7 +14,7 @@
             <el-image v-if="url === ''" :src="url === '' ? placeholder : url" :style="`width:${width}px;height:${height}px;`" fit="fill">
                 <template #error>
                     <div class="image-slot">
-                        <i class="el-icon-plus" />
+                        <svg-icon name="el-icon-plus" />
                     </div>
                 </template>
             </el-image>
@@ -23,17 +23,17 @@
                 <div class="mask">
                     <div class="actions">
                         <span title="预览" @click.stop="preview">
-                            <i class="el-icon-zoom-in" />
+                            <el-icon><el-icon-zoom-in /></el-icon>
                         </span>
                         <span title="移除" @click.stop="remove">
-                            <i class="el-icon-delete" />
+                            <el-icon><el-icon-delete /></el-icon>
                         </span>
                     </div>
                 </div>
             </div>
-            <div v-show="data.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
-                <el-image :src="data.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
-                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="data.progress.percent" />
+            <div v-show="url === '' && uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
+                <el-image :src="uploadData.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
+                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="uploadData.progress.percent" />
             </div>
         </el-upload>
         <div v-if="!notip" class="el-upload__tip">
@@ -41,7 +41,7 @@
                 <el-alert :title="`上传图片支持 ${ ext.join(' / ') } 格式，且图片大小不超过 ${ size }MB，建议图片尺寸为 ${width}*${height}`" type="info" show-icon :closable="false" />
             </div>
         </div>
-        <el-image-viewer v-if="data.imageViewerVisible" :url-list="[url]" @close="previewClose" />
+        <el-image-viewer v-if="uploadData.imageViewerVisible" :url-list="[url]" @close="previewClose" />
     </div>
 </template>
 
@@ -97,7 +97,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:url', 'on-success'])
 
-const data = ref({
+const uploadData = ref({
     imageViewerVisible: false,
     progress: {
         preview: '',
@@ -107,11 +107,11 @@ const data = ref({
 
 // 预览
 function preview() {
-    data.value.imageViewerVisible = true
+    uploadData.value.imageViewerVisible = true
 }
 // 关闭预览
 function previewClose() {
-    data.value.imageViewerVisible = false
+    uploadData.value.imageViewerVisible = false
 }
 // 移除
 function remove() {
@@ -129,20 +129,16 @@ function beforeUpload(file) {
         proxy.$message.error(`上传图片大小不能超过 ${props.size}MB！`)
     }
     if (isTypeOk && isSizeOk) {
-        data.value.progress.preview = URL.createObjectURL(file)
+        uploadData.value.progress.preview = URL.createObjectURL(file)
     }
     return isTypeOk && isSizeOk
 }
 function onProgress(file) {
-    data.value.progress.percent = ~~file.percent
-    if (data.value.progress.percent == 100) {
-        setTimeout(() => {
-            data.value.progress.preview = ''
-            data.value.progress.percent = 0
-        }, 1000)
-    }
+    uploadData.value.progress.percent = ~~file.percent
 }
 function onSuccess(res) {
+    uploadData.value.progress.preview = ''
+    uploadData.value.progress.percent = 0
     emit('on-success', res)
 }
 </script>
@@ -154,12 +150,11 @@ function onSuccess(res) {
 .image {
     position: relative;
     .mask {
-        opacity: 0%;
+        opacity: 0;
         position: absolute;
         top: 0;
         width: 100%;
         height: 100%;
-        font-size: 24px;
         background-color: rgb(0 0 0 / 50%);
         transition: all 0.3s;
         .actions {
@@ -183,11 +178,14 @@ function onSuccess(res) {
                 &:hover:not(.disabled) {
                     transform: scale(1.5);
                 }
+                .el-icon {
+                    font-size: 24px;
+                }
             }
         }
     }
     &:hover .mask {
-        opacity: 100%;
+        opacity: 1;
     }
 }
 :deep(.el-upload) {
@@ -206,8 +204,10 @@ function onSuccess(res) {
                 width: 100%;
                 height: 100%;
                 color: #909399;
-                font-size: 30px;
                 background-color: transparent;
+                i {
+                    font-size: 30px;
+                }
             }
         }
         .progress {

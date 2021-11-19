@@ -43,13 +43,7 @@ const breadcrumbList = computed(() => {
         })
     }
     if (route.meta.breadcrumbNeste) {
-        route.meta.breadcrumbNeste.map((item, index) => {
-            let tmpItem = deepClone(item)
-            if (index != 0) {
-                tmpItem.path = `${route.meta.breadcrumbNeste[0].path}/${item.path}`
-            }
-            breadcrumbList.push(tmpItem)
-        })
+        breadcrumbList.push(...deepClone(route.meta.breadcrumbNeste))
     }
     return breadcrumbList
 })
@@ -138,7 +132,7 @@ function pathCompile(path) {
 }
 .breadcrumb-enter-from,
 .breadcrumb-leave-active {
-    opacity: 0%;
+    opacity: 0;
     transform: translateX(30px) skewX(-50deg);
 }
 </style>

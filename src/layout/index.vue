@@ -38,8 +38,7 @@ import ThemeSetting from './components/ThemeSetting/index.vue'
 
 const { proxy } = getCurrentInstance()
 const store = useStore()
-const router = useRouter()
-
+const routeInfo = useRoute(), router = useRouter()
 watch(() => store.state.settings.sidebarCollapse, val => {
     if (store.state.settings.mode === 'mobile') {
         if (!val) {
@@ -47,6 +46,14 @@ watch(() => store.state.settings.sidebarCollapse, val => {
         } else {
             document.querySelector('body').classList.remove('hidden')
         }
+    }
+})
+
+watch(() => routeInfo.path, () => {
+    if (store.state.settings.mode === 'mobile') {
+        store.commit('settings/updateThemeSetting', {
+            sidebarCollapse: true
+        })
     }
 })
 
@@ -69,7 +76,7 @@ provide('switchMenu', switchMenu)
 function switchMenu(index) {
     store.commit('menu/switchHeaderActived', index)
     if (store.state.settings.switchSidebarAndPageJump) {
-        router.push(store.getters['menu/sidebarRoutes'][0].path)
+        router.push(store.getters['menu/sidebarRoutesFirstDeepestPath'])
     }
 }
 </script>
@@ -182,10 +189,10 @@ function switchMenu(index) {
         backdrop-filter: blur(2px);
         transition: all 0.2s;
         transform: translateZ(0);
-        opacity: 0%;
+        opacity: 0;
         visibility: hidden;
         &.show {
-            opacity: 100%;
+            opacity: 1;
             visibility: visible;
         }
     }
@@ -245,11 +252,11 @@ header + .wrapper {
     transition: 0.15s;
 }
 .main-enter-from {
-    opacity: 0%;
+    opacity: 0;
     margin-left: -20px;
 }
 .main-leave-to {
-    opacity: 0%;
+    opacity: 0;
     margin-left: 20px;
 }
 </style>
