@@ -1,6 +1,6 @@
 <template>
     <div class="dplayer-wrap">
-        <img v-if="dataMap.loadError&&!dataMap.playEnd" class="poster" src="https://img.soogif.com/Y9smF83Qc3N4eA412AtqdA2v9JsDMZUh.gif" alt="">
+        <img v-if="dataMap.loadError&&dataMap.playEnd" class="poster" src="https://img.soogif.com/Y9smF83Qc3N4eA412AtqdA2v9JsDMZUh.gif" alt="">
         <div id="dplayer" />
     </div>
 </template>
@@ -26,7 +26,6 @@ function initDplayer() {
         container: document.getElementById('dplayer'),
         live: true,
         autoplay: true,
-        lang: 'zh-cn',
         video: {
             type: 'customHls',
             // url: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
@@ -49,7 +48,6 @@ function initDplayer() {
     hls.on(Hls.Events.ERROR, function(E, data) {
         dataMap.loadError = true
         console.log('错误信息', E, data)
-
         clearInterval(timer)
         timer = setTimeout(() => {
             hls.attachMedia(dp.video)
@@ -69,11 +67,13 @@ function registerEvent(dp) {
     })
     dp.on('timeupdate', () => {
         const duration = dp.video.duration || 0
-        if (dp.video.duration === duration) {
+        console.log('timeupdate', dp.video.currentTime, duration)
+        if (dp.video.currentTime === duration) {
             console.log('播放结束了')
             dataMap.playEnd = true
+        } else {
+            dataMap.playEnd = false
         }
-        console.log('timeupdate', dp.video.currentTime, duration)
     })
 }
 

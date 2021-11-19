@@ -35,7 +35,10 @@
         "tinymce": "^5.10.1",
         "vue": "^3.2.22",
         "vue-router": "^4.0.12",
-        "vuex": "^4.0.2"
+        "vuex": "^4.0.2",
+        "xgplayer": "^2.31.2",
+        "xgplayer-flv": "^2.4.32-3",
+        "xgplayer-hls.js": "^2.6.0"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^1.9.4",

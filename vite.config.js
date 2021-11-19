@@ -27,6 +27,7 @@ export default ({ mode, command }) => {
         server: {
             open: false,
             port: 9000,
+            host: '0.0.0.0',
             proxy: {
                 '/proxy': {
                     target: env.VITE_APP_API_BASEURL,
