@@ -4,7 +4,9 @@
             <el-tree :data="dataSource" show-checkbox node-key="id" default-expand-all :expand-on-click-node="false" :props="{ class: customNodeClass }" />
         </div>
         <div>
-            <el-button type="primary" @click="$router.push({name: 'DataExample'})">生成图表</el-button>
+            <el-button type="primary" @click="$router.push({ name: 'DataExample' })">
+                生成图表
+            </el-button>
         </div>
     </page-main>
 </template>
@@ -32,13 +34,16 @@ const data = [
                                     {
                                         id: 1111,
                                         label: '任务完成分布'
-                                    }, {
+                                    },
+                                    {
                                         id: 1112,
                                         label: '客户覆盖区域分布'
-                                    }, {
+                                    },
+                                    {
                                         id: 1112,
                                         label: '积分消耗情况'
-                                    }, {
+                                    },
+                                    {
                                         id: 1112,
                                         label: '客户覆盖职称分布'
                                     }

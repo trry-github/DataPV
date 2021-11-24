@@ -1,6 +1,6 @@
 <template>
     <div class="dplayer-wrap">
-        <img v-if="dataMap.loadError&&dataMap.playEnd" class="poster" src="https://img.soogif.com/Y9smF83Qc3N4eA412AtqdA2v9JsDMZUh.gif" alt="">
+        <!-- <img v-if="dataMap.loadError&&dataMap.playEnd" class="poster" src="https://img.soogif.com/Y9smF83Qc3N4eA412AtqdA2v9JsDMZUh.gif" alt=""> -->
         <div id="dplayer" />
     </div>
 </template>
@@ -50,8 +50,8 @@ function initDplayer() {
         console.log('错误信息', E, data)
         clearInterval(timer)
         timer = setTimeout(() => {
-            hls.attachMedia(dp.video)
-            hls.loadSource(options.video.url)
+            // hls.attachMedia(dp.video)
+            // hls.loadSource(options.video.url)
         }, 3000)
     })
 
@@ -68,7 +68,8 @@ function registerEvent(dp) {
     dp.on('timeupdate', () => {
         const duration = dp.video.duration || 0
         console.log('timeupdate', dp.video.currentTime, duration)
-        if (dp.video.currentTime === duration) {
+        const currentTime = parseFloat(dp.video.currentTime)
+        if (currentTime === duration && dp.video.currentTime !== 0 && duration !== 0) {
             console.log('播放结束了')
             dataMap.playEnd = true
         } else {
