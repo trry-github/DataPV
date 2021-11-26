@@ -44,17 +44,6 @@ function initDplayer() {
     }
     dp = new DPlayer(options)
 
-    // 监听拉流状态
-    hls.on(Hls.Events.ERROR, function(E, data) {
-        dataMap.loadError = true
-        console.log('错误信息', E, data)
-        clearInterval(timer)
-        timer = setTimeout(() => {
-            // hls.attachMedia(dp.video)
-            // hls.loadSource(options.video.url)
-        }, 3000)
-    })
-
     // media(dp.video)
     registerEvent(dp)
 }
