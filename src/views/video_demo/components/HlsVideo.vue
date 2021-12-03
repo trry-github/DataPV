@@ -27,7 +27,7 @@ function init() {
         hls.loadSource(videoUrl)
         hls.attachMedia(video)
         hls.on(Hls.Events.MANIFEST_PARSED, function() {
-            video.play() // 调用播放 API
+            video.liveSyncPosition() // 调用播放 API
         })
 
         hls.on(Hls.Events.ERROR, function(event, data) {
