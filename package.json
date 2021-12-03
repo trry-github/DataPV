@@ -41,7 +41,8 @@
         "vuex": "^4.0.2",
         "xgplayer": "^2.31.2",
         "xgplayer-flv": "^2.4.32-3",
-        "xgplayer-hls.js": "^2.6.0"
+        "xgplayer-hls": "^2.4.32-3",
+        "xgplayer-mp4": "^2.0.0"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^1.9.4",
