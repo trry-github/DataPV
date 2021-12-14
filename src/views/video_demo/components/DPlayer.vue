@@ -65,6 +65,12 @@ function registerEvent(dp) {
             dataMap.playEnd = false
         }
     })
+    dp.on('fullscreen', () => {
+        console.log('fullscreen')
+    })
+    dp.on('fullscreen_cancel', () => {
+        console.log('fullscreen_cancel')
+    })
 }
 
 onUnmounted(() => {
