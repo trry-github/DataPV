@@ -28,7 +28,6 @@ function initDplayer() {
         autoplay: true,
         video: {
             type: 'customHls',
-            // url: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
             url: 'https://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540.m3u8', // 示例地址
             customType: {
                 customHls: function(video) {
@@ -36,15 +35,10 @@ function initDplayer() {
                     hls.attachMedia(video)
                 }
             }
-            // url: 'http://cctvalih5ca.v.myalicdn.com/live/cctv1_2/index.m3u8'
-            // url: 'rtmp://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540'
-            // url: 'webrtc://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540'
-            // url: 'https://play.yaomaitong.net/qxs-live/ea0a9821109cf21eca7052bd96148792_NLD540.flv'
         }
     }
     dp = new DPlayer(options)
 
-    // media(dp.video)
     registerEvent(dp)
 }
 function registerEvent(dp) {
